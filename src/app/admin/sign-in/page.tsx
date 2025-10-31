@@ -1,7 +1,7 @@
 "use client";
 import { Suspense, useState } from "react";
 import Link from "next/link";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-authClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
