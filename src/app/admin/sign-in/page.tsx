@@ -60,7 +60,27 @@ export default function AdminSignInPage() {
   };
 
   const handleGoogle = async () => {
-    toast.info("Google OAuth is not configured for admin access yet.");
+    try {
+      setLoading(true);
+      const { data, error } = await authClient.signIn.google({
+        callbackURL: "/admin", // Ensure admin redirect on success
+      });
+      
+      if (error) {
+        toast.error("Google sign-in failed. Please try again.");
+        return;
+      }
+
+      // Set bearer token after successful login
+      if (data?.session?.token) {
+        localStorage.setItem("bearer_token", data.session.token);
+        window.location.href = "/admin";
+      }
+    } catch (err) {
+      toast.error("Google sign-in failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleQuickAdmin = async () => {
